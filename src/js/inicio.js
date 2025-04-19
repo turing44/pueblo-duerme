@@ -2,10 +2,10 @@
 localStorage.clear();
 
 
-function handleCheckClick(event) {
+function abrirModalNormas(event) {
     event.preventDefault();
-    const modal = new bootstrap.Modal(document.getElementById('normasModal'));
-    modal.show();
+    const modalNormas = new bootstrap.Modal(document.getElementById('normasModal'));
+    modalNormas.show();
 }
 
 function marcarCheck() {
