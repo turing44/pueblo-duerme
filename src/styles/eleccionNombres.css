@@ -1,0 +1,83 @@
+/* eleccionNombres.css */
+
+/* Centrado y fondo ligero */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Caja del formulario */
+.form-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+/* Título centrado */
+.form-container h2 {
+    text-align: center;
+    margin: 0 0 1.5rem;
+    font-size: 1.5rem;
+}
+
+/* Contenedor de los inputs dinámicos */
+#inputs-jugadores {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Estilo de cada input de nombre */
+.input-nombre {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+/* Botones */
+button {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-sizing: border-box;
+}
+
+/* Espacio entre botones */
+button + button {
+    margin-top: 0.8rem;
+}
+
+/* Hover de los botones */
+button:hover {
+    background-color: #333;
+}
+
+/* Botón "Añadir otro jugador" ligeramente diferenciado */
+#agregar-nuevo-jugador {
+    background-color: #555;
+}
+
+#agregar-nuevo-jugador:hover {
+    background-color: #777;
+}
