@@ -9,27 +9,26 @@ function abrirModalNormas(event) {
 }
 
 function marcarCheck() {
-    const check = document.getElementById('exampleCheck1');
+    const check = document.getElementById('checkNormas');
     check.checked = true;
     actualizarBoton();
 }
 
 function desmarcarCheck() {
-    const check = document.getElementById('exampleCheck1');
+    const check = document.getElementById('checkNormas');
     check.checked = false;
     actualizarBoton();
 }
 
 function actualizarBoton() {
-    const check = document.getElementById('exampleCheck1');
+    const check = document.getElementById('checkNormas');
     const boton = document.getElementById('jugarBtn');
     boton.disabled = !check.checked;
 }
 
-document.querySelector('form').addEventListener('submit', function (e) {
-    const check = document.getElementById('exampleCheck1');
-    if (!check.checked) {
-        e.preventDefault();
-        alert('Debes aceptar las normas antes de jugar 🧠');
+function irAJugar() {
+    const check = document.getElementById('checkNormas');
+    if (check.checked) {
+        window.location.href = './src/pages/eleccionNombres.html';
     }
-});
+}
