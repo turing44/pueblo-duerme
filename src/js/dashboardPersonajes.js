@@ -36,10 +36,47 @@ function mostrarJugadores() {
 }
 
 function logicaElegido(nombre) {
-    juego.matarJugador(nombre);
-    alert(`${nombre} ha muerto`);
-    siguienteFase();
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+        title: "¿Estás seguro/a?",
+        text: `¿Quieres matar a ${nombre}?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "¡Sí, matar!",
+        cancelButtonText: "No, he cambiado de opinión",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Llamamos correctamente a matar() sin modificar el estado directamente.
+            juego.matarJugador(nombre);
+
+            swalWithBootstrapButtons.fire({
+                title: "¡Asesinato completado!",
+                text: `${nombre} ha muerto`,
+                icon: "success"
+            }).then(() => {
+                // Ejecutamos siguienteFase después del mensaje de éxito
+                siguienteFase();
+            });
+
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+                title: "Cancelado",
+                text: "Dale otra vuelta a la elección tu víctima",
+                icon: "error"
+            });
+        }
+    });
 }
+
+
 
 function siguienteFase() {
     const estado = juego.comprobarVictoria();
@@ -110,7 +147,7 @@ function crearBotonVerRol(nombre, jugador) {
     boton.type = "button";
     boton.innerHTML = `<img src="${imgOjo}" alt="ver rol">`;
     boton.addEventListener("click", () => {
-        alert(`${nombre} es: ${jugador.getRol()}`);
+        Swal.fire(`${nombre} es ${jugador.getRol()}`);
     });
     return boton;
 }
@@ -119,7 +156,7 @@ function crearBotonMatar(listaCheckboxes) {
     const boton = document.createElement("button");
     boton.type = "submit";
     boton.id = "boton-matar";
-    boton.textContent = "MATAR A LA BESTIA";
+    boton.textContent = "MATAR";
 
     boton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -131,8 +168,12 @@ function crearBotonMatar(listaCheckboxes) {
             logicaElegido(nombre);
         } else {
             // controlo aqui que no sea la primera fase, la de ver roles
-            if (boton.textContent === "MATAR A LA BESTIA") {
-                alert("Debes seleccionar a alguien para votar");
+            if (boton.textContent === "MATAR") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Selecciona a alguien",
+                    text: "Debes seleccionar a alguien para votar",
+                });
             }
             siguienteFase();
         }
