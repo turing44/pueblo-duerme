@@ -95,7 +95,9 @@ function siguienteFase() {
 
         mostrarJugadores();
     } else {
+        cabeceraFase.style.display = "none";
         contenedorPrincipal.innerHTML = `<h1><center>${estado}</center></h1>`;
+        contenedorPrincipal.style.color = "white";
     }
 }
 
