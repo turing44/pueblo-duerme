@@ -15,6 +15,10 @@ cabeceraFase.innerHTML = "VER ROLES";
 
 // ocultar checkbox votar
 
+//ocultar checkbox votar
+let faseVerRoles = true;
+const jugadoresQueVieronRol = new Set();
+
 document.getElementById("boton-matar").innerHTML = "COMENZAR";
 
 
@@ -140,6 +144,10 @@ function crearCheckbox(nombre, estaVivo, listaCheckboxes) {
         }
     });
 
+    if (!["NOCHE", "DIA"].includes(cabeceraFase.innerHTML)) {
+        checkbox.style.display = 'none';
+    }
+
     listaCheckboxes.push(checkbox);
     return checkbox;
 }
@@ -149,7 +157,17 @@ function crearBotonVerRol(nombre, jugador) {
     boton.type = "button";
     boton.innerHTML = `<img src="${imgOjo}" alt="ver rol">`;
     boton.addEventListener("click", () => {
-        Swal.fire(`${nombre} es ${jugador.getRol()}`);
+        if (faseVerRoles && !jugadoresQueVieronRol.has(nombre)) {
+            Swal.fire(`${nombre} es ${jugador.getRol()}`);
+            jugadoresQueVieronRol.add(nombre);
+            boton.disabled = true; //Desactiva el botón después de verlo
+        } else if (faseVerRoles) {
+            Swal.fire({
+                icon: "info",
+                title: "Ya viste tu rol",
+                text: "Solo puedes verlo una vez."
+            });
+        }
     });
     return boton;
 }
@@ -178,6 +196,7 @@ function crearBotonMatar(listaCheckboxes) {
                 });
             }
             siguienteFase();
+            faseVerRoles = false;
         }
     });
 
