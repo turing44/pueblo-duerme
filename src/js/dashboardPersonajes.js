@@ -13,12 +13,13 @@ juego.iniciarJuego();
 mostrarJugadores();
 cabeceraFase.innerHTML = "VER ROLES";
 
+// ocultar checkbox votar
+
 document.getElementById("boton-matar").innerHTML = "COMENZAR";
 
 
 
 // FUNCIONES PRINCIPALES
-
 function mostrarJugadores() {
     contenedorPrincipal.innerHTML = "";
 
@@ -127,6 +128,7 @@ function crearCheckbox(nombre, estaVivo, listaCheckboxes) {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.name = "voto";
+    checkbox.className = "boton-votar"
     checkbox.id = `voto-${nombre}`;
     checkbox.disabled = !estaVivo;
 
@@ -193,3 +195,4 @@ function activarModoDia() {
     cabeceraFase.innerHTML = "DIA";
     document.getElementById("sonidoAldeano").play();
 }
+
