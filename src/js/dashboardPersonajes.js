@@ -6,8 +6,6 @@ const imgOjo = "https://img.icons8.com/?size=100&id=60022&format=png&color=00000
 const contenedorPrincipal = document.getElementById("contenedor-principal");
 const cabeceraFase = document.getElementById("fase");
 
-let faseVerRoles = true;
-const jugadoresQueVieronRol = new Set();
 
 // INSTANCIA DEL JUEGO
 const juego = new Juego();
@@ -15,6 +13,10 @@ juego.iniciarJuego();
 mostrarJugadores();
 cabeceraFase.innerHTML = "VER ROLES";
 
+
+//ocultar checkbox votar
+let faseVerRoles = true;
+const jugadoresQueVieronRol = new Set();
 
 document.getElementById("boton-matar").innerHTML = "COMENZAR";
 
@@ -85,7 +87,6 @@ function siguienteFase() {
 
     if (estado === "AUN HAY LOBOS") {
         if (!["NOCHE", "DIA"].includes(cabeceraFase.innerHTML)) { // para la primera fase de ver roles
-            faseVerRoles = false;
             activarModoNoche();
         } else if (cabeceraFase.innerHTML === "NOCHE") {
             activarModoDia();
@@ -158,11 +159,15 @@ function crearBotonVerRol(nombre, jugador) {
         if (faseVerRoles && !jugadoresQueVieronRol.has(nombre)) {
             Swal.fire(`${nombre} es ${jugador.getRol()}`);
             jugadoresQueVieronRol.add(nombre);
-            boton.style.display = "none"; //Desactiva el botón después de verlo
+            boton.disabled = true; //Desactiva el botón después de verlo
+        } else if (faseVerRoles) {
+            Swal.fire({
+                icon: "info",
+                title: "Ya viste tu rol",
+                text: "Solo puedes verlo una vez."
+            });
         }
     });
-    if (!faseVerRoles) {boton.style.display = "none"}
-
     return boton;
 }
 
@@ -191,7 +196,7 @@ function crearBotonMatar(listaCheckboxes) {
             }
             else {
                 siguienteFase();
-
+                faseVerRoles = false;
             }
 
         }
