@@ -195,8 +195,11 @@ function crearBotonMatar(listaCheckboxes) {
                     text: "Debes seleccionar a alguien para votar",
                 });
             }
-            siguienteFase();
-            faseVerRoles = false;
+            else {
+                siguienteFase();
+                faseVerRoles = false;
+            }
+
         }
     });
 
@@ -207,11 +210,12 @@ function crearBotonMatar(listaCheckboxes) {
 
 function activarModoNoche() {
     cabeceraFase.innerHTML = "NOCHE";
-    document.getElementById("sonidoLobo").play();
+    setTimeout(() => {document.getElementById("sonidoLobo").play()},1000);
 }
 
 function activarModoDia() {
     cabeceraFase.innerHTML = "DIA";
-    document.getElementById("sonidoAldeano").play();
+    setTimeout(() => {document.getElementById("sonidoAldeano").play()},1000);
+
 }
 
