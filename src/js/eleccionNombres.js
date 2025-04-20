@@ -1,27 +1,33 @@
+const jugadoresMinimosParaEmpezar = 5;
+
 const inputsJugadores = document.getElementById("inputs-jugadores");
 const btnAgregarNuevoJugador = document.getElementById("agregar-nuevo-jugador");
 const formulario = document.getElementById("formulario-jugadores");
+const botonEnviarFormulario = document.getElementById("boton-enviar-formulario");
 
-let contador = 1;
+
+let contadorJugadores = 0;
+botonEnviarFormulario.style.display = 'none';
 
 btnAgregarNuevoJugador.addEventListener("click", () => {
     const nuevoCampo = document.createElement("nuevoCampo");
+
+    contadorJugadores++;
 
     // le especifico la clase para luego meter en un array todos los inputs que tenga esa clase
     nuevoCampo.innerHTML =
         `<input 
         type="text" 
-        placeholder="Nombre del jugador ${contador}" 
+        placeholder="Nombre del jugador ${contadorJugadores}" 
         class="input-nombre" 
-        id="jugador-${contador}" 
+        id="jugador-${contadorJugadores}" 
         required>
         `;
 
     inputsJugadores.appendChild(nuevoCampo);
 
-    contador++;
-    if(contador > 12){
-        btnAgregarNuevoJugador.style.display = 'none';
+    if (contadorJugadores >= jugadoresMinimosParaEmpezar) {
+        botonEnviarFormulario.style.display = 'block';
     }
 });
 

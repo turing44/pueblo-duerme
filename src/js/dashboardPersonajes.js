@@ -13,7 +13,6 @@ juego.iniciarJuego();
 mostrarJugadores();
 cabeceraFase.innerHTML = "VER ROLES";
 
-// ocultar checkbox votar
 
 //ocultar checkbox votar
 let faseVerRoles = true;
@@ -210,12 +209,16 @@ function crearBotonMatar(listaCheckboxes) {
 
 function activarModoNoche() {
     cabeceraFase.innerHTML = "NOCHE";
-    setTimeout(() => {document.getElementById("sonidoLobo").play()},1000);
+    setTimeout(() => {
+        document.getElementById("sonidoLobo").play()
+    },1000);
 }
 
 function activarModoDia() {
     cabeceraFase.innerHTML = "DIA";
-    setTimeout(() => {document.getElementById("sonidoAldeano").play()},1000);
+    setTimeout(() => {
+        document.getElementById("sonidoAldeano").play()
+    },1000);
 
 }
 
