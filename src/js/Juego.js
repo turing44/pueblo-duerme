@@ -2,10 +2,6 @@ class Juego {
     #listaJugadores = [];
     #numero_jugadores = 0;
     #roles = {};
-    /*#roles = {
-        "aldeano": 3,
-        "lobo": 1
-    };*/
 
 
     constructor() {
@@ -19,9 +15,7 @@ class Juego {
 
     iniciarJuego(){
         const listaNombres = JSON.parse(localStorage.getItem("listaNombres"));
-
         this.#listaJugadores = this.reordenarLista(this.crearJugadores(listaNombres));
-
     }
 
 
@@ -86,8 +80,8 @@ class Juego {
     }
 
     inicializarRoles(listaNombres){
-        let numLobos= this.getNumeroLobos(listaNombres.length);
-        let numAldeanos= listaNombres.length - numLobos;
+        const numLobos= this.getNumeroLobos(listaNombres.length);
+        const numAldeanos= listaNombres.length - numLobos;
 
         this.#roles= {
             "aldeano": numAldeanos,
@@ -99,7 +93,6 @@ class Juego {
         let numLobos=0;
         switch (numJugadores)
         {
-            case 4:
             case 5:
             case 6:
                 numLobos = 1;
@@ -109,9 +102,7 @@ class Juego {
             case 9:
                 numLobos = 2;
                 break;
-            case 10:
-            case 11:
-            case 12:
+            default:
                 numLobos = 3;
                 break;
         }
