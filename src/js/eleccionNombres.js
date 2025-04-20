@@ -20,6 +20,9 @@ btnAgregarNuevoJugador.addEventListener("click", () => {
     inputsJugadores.appendChild(nuevoCampo);
 
     contador++;
+    if(contador > 12){
+        btnAgregarNuevoJugador.style.display = 'none';
+    }
 });
 
 formulario.addEventListener("submit", e => {

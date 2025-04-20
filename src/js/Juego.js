@@ -1,11 +1,11 @@
 class Juego {
     #listaJugadores = [];
     #numero_jugadores = 0;
-
-    #roles = {
+    #roles = {};
+    /*#roles = {
         "aldeano": 3,
         "lobo": 1
-    };
+    };*/
 
 
     constructor() {
@@ -69,6 +69,7 @@ class Juego {
     }
 
     crearJugadores(listaNombres) {
+        this.inicializarRoles(listaNombres);
         let indiceListaNombres = 0;
         let jugadores = [];
 
@@ -84,6 +85,39 @@ class Juego {
         return jugadores;
     }
 
+    inicializarRoles(listaNombres){
+        let numLobos= this.getNumeroLobos(listaNombres.length);
+        let numAldeanos= listaNombres.length - numLobos;
+
+        this.#roles= {
+            "aldeano": numAldeanos,
+            "lobo":numLobos
+        }
+    }
+
+    getNumeroLobos(numJugadores){
+        let numLobos=0;
+        switch (numJugadores)
+        {
+            case 4:
+            case 5:
+            case 6:
+                numLobos = 1;
+                break;
+            case 7:
+            case 8:
+            case 9:
+                numLobos = 2;
+                break;
+            case 10:
+            case 11:
+            case 12:
+                numLobos = 3;
+                break;
+        }
+        return numLobos;
+    }
+
     matarJugador(nombre) {
         for (let jugador of this.getListaJugadores()) {
             if (nombre === jugador.getNombre()){
@@ -91,6 +125,4 @@ class Juego {
             }
         }
     }
-
-
 }
