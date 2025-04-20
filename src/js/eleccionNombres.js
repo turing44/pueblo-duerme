@@ -10,7 +10,7 @@ let contadorJugadores = 0;
 botonEnviarFormulario.style.display = 'none';
 
 btnAgregarNuevoJugador.addEventListener("click", () => {
-    const nuevoCampo = document.createElement("div");
+    const nuevoCampo = document.createElement("nuevoCampo");
 
     contadorJugadores++;
 
