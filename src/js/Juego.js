@@ -24,7 +24,6 @@ class Juego {
 
     }
 
-
     comprobarVictoria() {
         let numeroLobos = 0;
         let numeroAldeanos = 0;
@@ -113,6 +112,9 @@ class Juego {
             case 11:
             case 12:
                 numLobos = 3;
+                break;
+            default:
+                numLobos = 4;
                 break;
         }
         return numLobos;
